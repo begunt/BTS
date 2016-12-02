@@ -1,0 +1,21 @@
+
+/*Issue*/
+#selectStatus, #selectEmployee, #selectProject, #selectIssueType,#selectAssignee, #selectPriority, #selectSeverity, #selectErrorType{
+    width: 300px;
+}
+
+#inputSummary, #areaDescription{
+    width: 600px;
+}
+
+/*Employee*/
+
+#inputFirstName, #inputLastName, #inputLogin, #inputFirstNameFilter, #inputLastNameFilter{
+    width: 600px;
+}
+
+/*Project*/
+
+#inputName, #inputDescription, #inputNameFilter, #inputinputDescriptionFilter{
+    width: 600px;
+}

@@ -1,0 +1,117 @@
+CREATE DATABASE IF NOT EXISTS `bts` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `bts`;
+
+DROP TABLE IF EXISTS `Time`;
+DROP TABLE IF EXISTS `Task`;
+DROP TABLE IF EXISTS `Issue`;
+DROP TABLE IF EXISTS `m2m_project_employee`;
+DROP TABLE IF EXISTS `Employee`;
+DROP TABLE IF EXISTS `Project`;
+DROP TABLE IF EXISTS `Role`;
+
+CREATE TABLE IF NOT EXISTS `Role` (
+	`idRole` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `nameRole` VARCHAR(45) NOT NULL,
+    UNIQUE INDEX `idRole_UNIQUE` (`idRole` ASC),
+    UNIQUE INDEX `NameRole_UNIQUE` (`NameRole` ASC),
+    PRIMARY KEY (`idRole`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `Project` (
+  `idProject` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  UNIQUE INDEX `idProject_UNIQUE` (`idProject` ASC),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
+  PRIMARY KEY (`idProject`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `Employee` (
+  `idEmployee` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idRole` INT UNSIGNED NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(25) NOT NULL,
+  `password` VARCHAR(9) NOT NULL,
+  `salary` BIGINT NOT NULL,
+  UNIQUE INDEX `idEmployee_UNIQUE` (`idEmployee` ASC),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC),
+  UNIQUE INDEX `lastName_UNIQUE` (`lastName` ASC),
+  CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `Role` (`idRole`) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (`idEmployee`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `m2m_project_employee` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idProject` INT UNSIGNED NOT NULL,
+  `idEmployee` INT UNSIGNED NOT NULL,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  CONSTRAINT `idProject` FOREIGN KEY (`idProject`) REFERENCES `Project` (`idProject`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idEmployee` FOREIGN KEY (`idEmployee`) REFERENCES `Employee` (`idEmployee`) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `Issue` (
+  `idIssue` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idEmployee` INT UNSIGNED NOT NULL,
+  `idProject` INT UNSIGNED NOT NULL,
+  `summary` VARCHAR(255) NOT NULL,
+  `issueType` VARCHAR(45) NOT NULL,
+  `priority` VARCHAR(25) NOT NULL,
+  `status` VARCHAR(25) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `createdDate` DATE NOT NULL,
+  `severity` VARCHAR(25) NOT NULL,
+  `errorType` VARCHAR(25) NOT NULL,
+  `assignee` VARCHAR(25) NOT NULL,
+  UNIQUE INDEX `idIssue_UNIQUE` (`idIssue` ASC),
+  CONSTRAINT `idEmployeeIssue` FOREIGN KEY (`idEmployee`) REFERENCES `Employee` (`idEmployee`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idProjectIssue` FOREIGN KEY (`idProject`) REFERENCES `Project` (`idProject`) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (`idIssue`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `Task` (
+  `idTask` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idProject` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  UNIQUE INDEX `idTask_UNIQUE` (`idTask` ASC),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC),
+  CONSTRAINT `idProjectTask` FOREIGN KEY (`idProject`) REFERENCES `Project` (`idProject`) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (`idTask`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `Time` (
+  `idTime` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idTask` INT UNSIGNED NOT NULL,
+  `idEmployee` INT UNSIGNED NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `category` VARCHAR(255) NOT NULL,
+  `status` VARCHAR(25) NOT NULL,
+  `timeSpent` TIME NOT NULL,
+  UNIQUE INDEX `ididTime_UNIQUE` (`idTime` ASC),
+  CONSTRAINT `idTask` FOREIGN KEY (`idTask`) REFERENCES `Task` (`idTask`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idEmployeeTime` FOREIGN KEY (`idEmployee`) REFERENCES `Employee` (`idEmployee`) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (`idTime`)
+ )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;book

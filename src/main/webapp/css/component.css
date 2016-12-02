@@ -1,0 +1,121 @@
+*,
+*:after,
+*::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* Эффект 2: 3D */
+.cl-effect-2 a {
+	line-height: 44px;
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	perspective: 1000px;
+    color: #ffffff;
+}
+
+.cl-effect-2 a span {
+	position: relative;
+	display: inline-block;
+	padding: 0 14px;
+	background: #2195de;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+    color: #ffffff;
+}
+
+.csstransforms3d .cl-effect-2 a span::before {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #0965a0;
+	content: attr(data-hover);
+	-webkit-transition: background 0.3s;
+	-moz-transition: background 0.3s;
+	transition: background 0.3s;
+	-webkit-transform: rotateX(-90deg);
+	-moz-transform: rotateX(-90deg);
+	transform: rotateX(-90deg);
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+    padding-right: 14px;
+    padding-left: 14px;
+    color: #ffffff;
+}
+
+.cl-effect-2 a:hover span,
+.cl-effect-2 a:focus span {
+	-webkit-transform: rotateX(90deg) translateY(-22px);
+	-moz-transform: rotateX(90deg) translateY(-22px);
+	transform: rotateX(90deg) translateY(-22px);
+    color: #ffffff;
+}
+
+.csstransforms3d .cl-effect-2 a:hover span::before,
+.csstransforms3d .cl-effect-2 a:focus span::before {
+	background: #28a2ee;
+    color: #ffffff;
+}
+
+.linkByIssue, .linkByDefect, .linkByStatus,.linkByAssignee,.linkByTime{
+    float:left;
+    color: #ffffff;
+}
+.cl-effect-2{
+ color: #ffffff;
+}
+
+.color-5{
+    margin-left: 150px;
+    margin-bottom: 12px;
+}
+
+.color-4{
+	margin-left: 390px;
+	margin-bottom: 12px;
+}
+
+.color-4 .cl-effect-2 span{
+	width: 120px;
+	text-align:center;
+	font-size: 16px;
+}
+
+#main{
+    color:#9d9d9d;
+    text-align: center;
+}
+
+#edit{
+    margin-left: 360px;
+    width: 120px;
+}
+
+#delete{
+    width: 120px;
+}
+
+.linkFiltr, .linkSearch{
+    width:100px;
+    text-align: center;
+}
+
+.linkFiltr{
+    margin-left: 235px;
+}
+
+
+
+
